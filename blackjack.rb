@@ -26,13 +26,13 @@ class Deck
   def initialize
   cards = [:A,2,3,4,5,6,7,8,9,10,:J,:Q,:K]
   suits = [:S,:H,:D,:C]
+  @cards = []
 
     suits.each do |x|
-      cards.size.each do |y|
-        @cards << Card.new(cards[x],y)
+      cards.size.times do |y|
+        @cards << Card.new(cards[y],x)
       end
     end
-
     @drawn = []
   end
 
@@ -55,6 +55,7 @@ class Hand
 
   def initialize
     @hand_value = 0
+    hand = []
   end
 
   def add(*cards)
