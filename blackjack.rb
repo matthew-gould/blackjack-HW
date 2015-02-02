@@ -24,7 +24,15 @@ end
 class Deck
 
   def initialize
-    @cards = (1..52).to_a
+  cards = [:A,2,3,4,5,6,7,8,9,10,:J,:Q,:K]
+  suits = [:S,:H,:D,:C]
+
+    suits.each do |x|
+      cards.size.each do |y|
+        @cards << Card.new(cards[x],y)
+      end
+    end
+
     @drawn = []
   end
 
@@ -60,20 +68,17 @@ class Hand
     @hand_value
   end
 
+  def busted?
+    if @hand_value > 21
+      true
+    end
+  end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  def blackjack?
+    if @hand_value == 21
+      true
+    end
+  end
 
 
 
