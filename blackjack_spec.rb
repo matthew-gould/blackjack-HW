@@ -20,7 +20,7 @@ class TestCard < Minitest::Test
 #     card = Card.new(:A, :D)
 #     assert_equal card.value, 11
 #   end
-# end
+end
 
 class TestDeck < Minitest::Test
   def test_counting_cards
@@ -86,4 +86,43 @@ class TestHand < Minitest::Test
     hand.add(Card.new(5, :S))
     assert_equal hand.to_s, 'AH, KS, 5S'
   end
+def test_all_aces
+    hand = Hand.new
+    hand.add(Card.new(:A, :H), Card.new(:A, :D))
+    hand.add(Card.new(:A, :S))
+    hand.add(Card.new(:A, :C))
+    assert_equal hand.value, 14
+  end
+
+  def test_much_aces_such_fail
+    hand = Hand.new
+    hand.add(Card.new(:A, :H), Card.new(5, :D))
+    hand.add(Card.new(6, :S))
+    hand.add(Card.new(:A, :D))
+    assert_equal hand.value, 13
+  end
+
+  def test_much_aces_such_blackjack
+    hand = Hand.new
+    hand.add(Card.new(:A, :H), Card.new(:A, :D))
+    hand.add(Card.new(:A, :S))
+    hand.add(Card.new(8, :C))
+    assert hand.blackjack?
+  end
+
+  def test_aces_for_daaaaays
+    hand = Hand.new
+    hand.add(Card.new(:A, :H), Card.new(8, :H))
+    hand.add(Card.new(8, :C))
+    hand.add(Card.new(8, :S))
+    hand.add(Card.new(10, :S))
+    assert hand.busted?
+  end
+
+
+
+
+
+
+
 end
